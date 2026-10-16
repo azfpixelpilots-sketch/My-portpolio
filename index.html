@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Developer & Designer Portfolio</title>
+    <!-- Gagamit tayo ng Inter font para sa malinis at international tech industry standard look -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0a0a0c;
+            --bg-card: #121216;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-title: #ffffff;
+            --text-body: #94a3b8;
+            --accent-glow: #3b82f6;
+            --accent-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .portfolio-wrapper {
+            width: 100%;
+            max-width: 650px; /* Perpektong sukat para sa mobile at desktop single-column layout */
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* --- HERO HEADER --- */
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .availability-badge {
+            align-self: flex-start;
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .availability-badge span {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .profile-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-title);
+            letter-spacing: -0.5px;
+        }
+
+        .profile-header p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* --- SERVICES / SERVICES OFFERED --- */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-title);
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 16px;
+        }
+
+        .service-box h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-title);
+            margin-bottom: 4px;
+        }
+
+        .service-box p {
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        /* --- SKILLS TAGS --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* --- WORK / PROJECTS SECTION --- */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .project-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .project-item:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-title);
+        }
+
+        .project-arrow {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .project-item:hover .project-arrow {
+            transform: translate(2px, -2px);
+            color: var(--text-title);
+        }
+
+        .project-description {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* --- FOOTER / CONTACT --- */
+        .footer-cta {
+            background: var(--text-title);
+            color: var(--bg-main);
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+            margin-top: 12px;
+        }
+
+        .footer-cta:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-wrapper">
+        
+        <!-- Hero Header Section -->
+        <header class="profile-header">
+            <div class="availability-badge">
+                <span></span> Available for freelance work
+            </div>
+            <h1>Hi, I'm a Web Developer & Designer</h1>
+            <p>
+                I build high-performance, beautiful, and responsive websites from scratch. I bridge the gap between clean code and conversion-focused user interfaces to help businesses grow online.
+            </p>
+        </header>
+
+        <!-- Services Section -->
+        <section>
+            <h2 class="section-title">What I Do</h2>
+            <div class="services-grid">
+                <div class="service-box">
+                    <h3>Web Development</h3>
+                    <p>Building lightning-fast, mobile-first websites with clean HTML, CSS, and modern architectures.</p>
+                </div>
+                <div class="service-box">
+                    <h3>UI/UX Design</h3>
+                    <p>Creating functional, professional layouts that provide seamless navigation for your users.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Website Revamp</h3>
+                    <p>Redesigning outdated business websites to improve appearance, usability, and visitor retention.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Landing Pages</h3>
+                    <p>Crafting high-converting single-page sales or booking funnels tailored for service industries.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+            <h2 class="section-title">Core Stack & Tools</h2>
+            <div class="skills-container">
+                <span class="skill-item">HTML5 / CSS3</span>
+                <span class="skill-item">JavaScript (ES6+)</span>
+                <span class="skill-item">Responsive Design</span>
+                <span class="skill-item">WordPress & Elementor</span>
+                <span class="skill-item">Git & GitHub</span>
+                <span class="skill-item">Vercel / Netlify</span>
+            </div>
+        </section>
+
+        <!-- General Projects Section -->
+        <section>
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="projects-list">
+                
+                <!-- Project 1 (Ang link ng casino dashboard mo) -->
+                <a href="https://vercel.app" target="_blank" class="project-item">
+                    <div class="project-header">
+                        <span class="project-name">VIP Gaming Dashboard Application</span>
+                        <span class="project-arrow">↗</span>
+                    </div>
+                    <p class="project-description">
+                        A modern dark-themed dashboard concept designed for web-based applications. Built with a focus on strict grid alignment, custom components, and highly interactive user interfaces.
+                    </p>
+                </a>
+
+                <!-- Project 2 Placeholder (Dito mo pwedeng ilagay ang susunod mong magiging project tulad ng e-commerce or business site) -->
+                <div class="project-item" style="opacity: 0.65;">
+                    <div class="project-header">
+                        <span class="project-name">Local Business Landing Page</span>
+                        <span class="project-arrow">🔒 In Progress</span>
+                    </div>
+                    <p class="project-description">
+                        A mobile-responsive service landing page crafted for local transportation, focusing on clean booking flow forms and conversion-driven UI layouts.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Call to Action Footer -->
+        <!-- Palitan ang link ng FB profile mo o Telegram/WhatsApp link mo para mabilis kang makontak -->
+        <a href="https://m.me" target="_blank" class="footer-cta">
+            Get in touch — Let's collaborate
+        </a>
+
+    </div>
+
+</body>
+</html>
