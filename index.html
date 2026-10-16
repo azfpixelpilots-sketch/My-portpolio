@@ -1,305 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Developer & Designer Portfolio</title>
-    <!-- Gagamit tayo ng Inter font para sa malinis at international tech industry standard look -->
-    <link href="https://googleapis.com" rel="stylesheet">
+    <title>Modern Portfolio Showcase</title>
     <style>
-        :root {
-            --bg-main: #0a0a0c;
-            --bg-card: #121216;
-            --border-color: rgba(255, 255, 255, 0.06);
-            --text-title: #ffffff;
-            --text-body: #94a3b8;
-            --accent-glow: #3b82f6;
-            --accent-green: #10b981;
-        }
-
+        /* Base Styles & Background Dynamic Movement */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-body);
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #311042);
+            color: #f8fafc;
             min-height: 100vh;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
+            overflow-x: hidden;
         }
 
-        .portfolio-wrapper {
-            width: 100%;
-            max-width: 650px; /* Perpektong sukat para sa mobile at desktop single-column layout */
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        /* --- HERO HEADER --- */
-        .profile-header {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .availability-badge {
-            align-self: flex-start;
-            background: rgba(16, 185, 129, 0.08);
-            color: var(--accent-green);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .availability-badge span {
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .profile-header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-title);
-            letter-spacing: -0.5px;
-        }
-
-        .profile-header p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* --- SERVICES / SERVICES OFFERED --- */
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-title);
-            margin-bottom: 16px;
-            letter-spacing: -0.3px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        @media (max-width: 480px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .service-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 16px;
+        /* Glassmorphism Reusable Style */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        .service-box h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-title);
-            margin-bottom: 4px;
+        /* 1. Sticky Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
         }
 
-        .service-box p {
-            font-size: 0.8rem;
-            line-height: 1.4;
-        }
-
-        /* --- SKILLS TAGS --- */
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            color: #e2e8f0;
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        /* --- WORK / PROJECTS SECTION --- */
-        .projects-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .project-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 20px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.2s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .project-item:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .project-header {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
         }
 
-        .project-name {
-            font-size: 1.05rem;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        /* Container Settings */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 7rem;
+        }
+
+        /* 2. Hero Section (May Lalagyanan ng Imahe sa Gitna) */
+        .hero {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .image-showcase {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 3. Interactive Complete Form Section */
+        .form-section {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2.5rem;
+        }
+
+        .form-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #38bdf8;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Kulay para sa kalendaryo at oras na icon sa dark mode */
+        input::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, #38bdf8, #a855f7);
+            border: none;
+            border-radius: 8px;
+            color: white;
             font-weight: 600;
-            color: var(--text-title);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.2s;
+            margin-top: 1rem;
         }
 
-        .project-arrow {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.4);
-            transition: transform 0.2s ease;
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
-        .project-item:hover .project-arrow {
-            transform: translate(2px, -2px);
-            color: var(--text-title);
+        /* 4. Features/Grid Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
-        .project-description {
-            font-size: 0.85rem;
+        .feature-card {
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
-        /* --- FOOTER / CONTACT --- */
-        .footer-cta {
-            background: var(--text-title);
-            color: var(--bg-main);
-            text-decoration: none;
-            padding: 16px;
-            border-radius: 14px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: opacity 0.2s;
-            margin-top: 12px;
+        /* 5. Pricing Tables List Section */
+        .pricing-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        .footer-cta:hover {
-            opacity: 0.9;
+        .pricing-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .price-list {
+            list-style: none;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.3s;
+        }
+
+        .price-item:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .price-name {
+            font-weight: 500;
+        }
+
+        .price-value {
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .image-showcase { height: 250px; }
+            .form-section { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="portfolio-wrapper">
-        
-        <!-- Hero Header Section -->
-        <header class="profile-header">
-            <div class="availability-badge">
-                <span></span> Available for freelance work
-            </div>
-            <h1>Hi, I'm a Web Developer & Designer</h1>
-            <p>
-                I build high-performance, beautiful, and responsive websites from scratch. I bridge the gap between clean code and conversion-focused user interfaces to help businesses grow online.
-            </p>
-        </header>
+    <!-- Menu Bar sa Taas -->
+    <header>
+        <div class="navbar glass-panel">
+            <div class="logo">AZF PIXEL PILOTS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#book">Booking Form</a></li>
+                <li><a href="#rates">Rates</a></li>
+            </ul>
+        </div>
+    </header>
 
-        <!-- Services Section -->
-        <section>
-            <h2 class="section-title">What I Do</h2>
-            <div class="services-grid">
-                <div class="service-box">
-                    <h3>Web Development</h3>
-                    <p>Building lightning-fast, mobile-first websites with clean HTML, CSS, and modern architectures.</p>
-                </div>
-                <div class="service-box">
-                    <h3>UI/UX Design</h3>
-                    <p>Creating functional, professional layouts that provide seamless navigation for your users.</p>
-                </div>
-                <div class="service-box">
-                    <h3>Website Revamp</h3>
-                    <p>Redesigning outdated business websites to improve appearance, usability, and visitor retention.</p>
-                </div>
-                <div class="service-box">
-                    <h3>Landing Pages</h3>
-                    <p>Crafting high-converting single-page sales or booking funnels tailored for service industries.</p>
+    <div class="container">
+
+        <!-- Hero Section (Imahe sa Gitna) -->
+        <section id="home" class="hero">
+            <h1>Makabagong Solusyon Para sa Iyong Negosyo</h1>
+            <p>Ipinapakita ang isang modernong interface na binuo gamit ang Glass UI na may malinis, mabilis, at dynamic na galaw na swak sa panlasa ng mga kliyente ngayon.</p>
+            
+            <div class="image-showcase glass-panel">
+                <div class="image-placeholder">
+                    <img src="azflogo.jpg" alt="Showcase Image">
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section>
-            <h2 class="section-title">Core Stack & Tools</h2>
-            <div class="skills-container">
-                <span class="skill-item">HTML5 / CSS3</span>
-                <span class="skill-item">JavaScript (ES6+)</span>
-                <span class="skill-item">Responsive Design</span>
-                <span class="skill-item">WordPress & Elementor</span>
-                <span class="skill-item">Git & GitHub</span>
-                <span class="skill-item">Vercel / Netlify</span>
-            </div>
-        </section>
-
-        <!-- General Projects Section -->
-        <section>
-            <h2 class="section-title">Selected Projects</h2>
-            <div class="projects-list">
-                
-                <!-- Project 1 (Ang link ng casino dashboard mo) -->
-                <a href="https://vercel.app" target="_blank" class="project-item">
-                    <div class="project-header">
-                        <span class="project-name">VIP Gaming Dashboard Application</span>
-                        <span class="project-arrow">↗</span>
-                    </div>
-                    <p class="project-description">
-                        A modern dark-themed dashboard concept designed for web-based applications. Built with a focus on strict grid alignment, custom components, and highly interactive user interfaces.
-                    </p>
-                </a>
-
-                <!-- Project 2 Placeholder (Dito mo pwedeng ilagay ang susunod mong magiging project tulad ng e-commerce or business site) -->
-                <div class="project-item" style="opacity: 0.65;">
-                    <div class="project-header">
-                        <span class="project-name">Local Business Landing Page</span>
-                        <span class="project-arrow">🔒 In Progress</span>
-                    </div>
-                    <p class="project-description">
-                        A mobile-responsive service landing page crafted for local transportation, focusing on clean booking flow forms and conversion-driven UI layouts.
-                    </p>
+        <!-- Features/Grid Components -->
+        <section id="services">
+            <div class="features-grid">
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon">✨</div>
+                    <h3>Eleganteng UI</h3>
+                    <p>Gumagamit ng translucent blur layers upang lumikha ng natatanging lalim sa visual presentation.</p>
                 </div>
-
-            </div>
-        </section>
-
-        <!-- Call to Action Footer -->
-        <!-- Palitan ang link ng FB profile mo o Telegram/WhatsApp link mo para mabilis kang makontak -->
-        <a href="https://m.me" target="_blank" class="footer-cta">
-            Get in touch — Let's collaborate
-        </a>
-
-    </div>
-
-</body>
-</html>
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Mabilis na Performance</h3>
+                    <p>Optimisadong codes na nagpapatakbo sa website nang walang anumang lag o pagbagal.</p>
+                </div>
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Ligtas at Propesyonal</h3>
+                    <p>Sumusunod sa pinakabagong pamantayan ng web development para sa iyong seguridad.</p>
+                </div>
