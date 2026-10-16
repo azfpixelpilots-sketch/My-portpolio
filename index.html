@@ -1,313 +1,15 @@
 <!DOCTYPE html>
-<html lang="tl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Portfolio Showcase</title>
-    <style>
-        /* Base Styles & Background Dynamic Movement */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e1b4b, #311042);
-            color: #f8fafc;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Glassmorphism Reusable Style */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        /* 1. Sticky Navigation Bar */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 2rem;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0.75rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            background: linear-gradient(to right, #38bdf8, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #38bdf8;
-        }
-
-        /* Container Settings */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 6rem 2rem 2rem 2rem;
-        }
-
-        section {
-            margin-bottom: 6rem;
-            scroll-margin-top: 7rem;
-        }
-
-        /* 2. Hero Section (May Lalagyanan ng Imahe sa Gitna) */
-        .hero {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 1rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #fff, #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            color: #94a3b8;
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .image-showcase {
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .image-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-style: italic;
-        }
-
-        .image-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 3. Interactive Complete Form Section */
-        .form-section {
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 2.5rem;
-        }
-
-        .form-section h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-subtitle {
-            text-align: center;
-            color: #94a3b8;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.85rem 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #fff;
-            outline: none;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-
-        .form-control:focus {
-            border-color: #38bdf8;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
-        }
-
-        /* Kulay para sa kalendaryo at oras na icon sa dark mode */
-        input::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(to right, #38bdf8, #a855f7);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: opacity 0.3s, transform 0.2s;
-            margin-top: 1rem;
-        }
-
-        .btn-submit:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        /* 4. Features/Grid Section */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .feature-card h3 {
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-
-        .feature-card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* 5. Pricing Tables List Section */
-        .pricing-section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .pricing-section h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .price-list {
-            list-style: none;
-        }
-
-        .price-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.02);
-            transition: background 0.3s;
-        }
-
-        .price-item:hover {
-            background: rgba(255, 255, 255, 0.07);
-        }
-
-        .price-name {
-            font-weight: 500;
-        }
-
-        .price-value {
-            font-weight: 700;
-            color: #38bdf8;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Responsive Settings */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.2rem; }
-            .image-showcase { height: 250px; }
-            .form-section { padding: 1.5rem; }
-        }
-    </style>
+    <!-- I-link natin ang hiwalay na CSS file sa ibaba -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Menu Bar sa Taas -->
+    <!-- Top Menu Bar -->
     <header>
         <div class="navbar glass-panel">
             <div class="logo">AZF PIXEL PILOTS</div>
@@ -322,10 +24,10 @@
 
     <div class="container">
 
-        <!-- Hero Section (Imahe sa Gitna) -->
+        <!-- Hero Section -->
         <section id="home" class="hero">
-            <h1>Makabagong Solusyon Para sa Iyong Negosyo</h1>
-            <p>Ipinapakita ang isang modernong interface na binuo gamit ang Glass UI na may malinis, mabilis, at dynamic na galaw na swak sa panlasa ng mga kliyente ngayon.</p>
+            <h1>Innovative Solutions For Your Business</h1>
+            <p>Showcasing a modern interface built with Glass UI featuring a clean, fast, and dynamic user experience tailored for today's clients.</p>
             
             <div class="image-showcase glass-panel">
                 <div class="image-placeholder">
@@ -339,16 +41,95 @@
             <div class="features-grid">
                 <div class="feature-card glass-panel">
                     <div class="feature-icon">✨</div>
-                    <h3>Eleganteng UI</h3>
-                    <p>Gumagamit ng translucent blur layers upang lumikha ng natatanging lalim sa visual presentation.</p>
+                    <h3>Elegant UI</h3>
+                    <p>Utilizes translucent blur layers to create an outstanding depth in visual presentation.</p>
                 </div>
                 <div class="feature-card glass-panel">
                     <div class="feature-icon">⚡</div>
-                    <h3>Mabilis na Performance</h3>
-                    <p>Optimisadong codes na nagpapatakbo sa website nang walang anumang lag o pagbagal.</p>
+                    <h3>Fast Performance</h3>
+                    <p>Optimized codes running the website seamlessly without any lag or performance drops.</p>
                 </div>
                 <div class="feature-card glass-panel">
                     <div class="feature-icon">🛡️</div>
-                    <h3>Ligtas at Propesyonal</h3>
-                    <p>Sumusunod sa pinakabagong pamantayan ng web development para sa iyong seguridad.</p>
+                    <h3>Secure & Professional</h3>
+                    <p>Adhering to the latest web development standards to ensure maximum security.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Fixed Online Booking Form -->
+        <section id="book" class="form-section glass-panel">
+            <h2>Online Registration</h2>
+            <p class="form-subtitle">Confirm your booking details below</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Form Submitted Successfully!');">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="+1 234 567 890" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="johndoe@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passengers">Number of Passengers</label>
+                    <input type="number" id="passengers" class="form-control" placeholder="1" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="start-dest">Start Destination</label>
+                    <input type="text" id="start-dest" class="form-control" placeholder="Pick-up Point Location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="end-dest">End Destination</label>
+                    <input type="text" id="end-dest" class="form-control" placeholder="Drop-off Point Location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <input type="time" id="time" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Send Details</button>
+            </form>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="rates" class="pricing-section glass-panel">
+            <h2>Standard Pricing System</h2>
+            <ul class="price-list">
+                <li class="price-item">
+                    <span class="price-name">Basic Package Design</span>
+                    <span class="price-value">$49.00</span>
+                </li>
+                <li class="price-item">
+                    <span class="price-name">Standard Web System Setup</span>
+                    <span class="price-value">$99.00</span>
+                </li>
+                <li class="price-item">
+                    <span class="price-name">Premium Enterprise Infrastructure</span>
+                    <span class="price-value">$149.00</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 AZF Pixel Pilots. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
